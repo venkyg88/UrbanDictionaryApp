@@ -36,30 +36,43 @@ import com.squareup.moshi.JsonClass
  * }
  */
 @JsonClass(generateAdapter = true)
-data class NetworkVideoContainer(val videos: List<NetworkVideo>)
+data class NetworkVideoContainer(val list: List<NetworkVideo>)
 
 /**
  * Videos represent a devbyte that can be played.
  */
 @JsonClass(generateAdapter = true)
-data class NetworkVideo(
-        val title: String,
-        val description: String,
-        val url: String,
-        val updated: String,
-        val thumbnail: String,
-        val closedCaptions: String?)
+data class NetworkVideo(val defid: Int,
+                        val definition: String,
+                        val permalink: String,
+                        val thumbs_up: Int,
+                        val sound_urls: List<Any>,
+                        val author: String,
+                        val word: String,
+                        val current_vote: String,
+                        val written_on: String,
+                        val example: String,
+                        val thumbs_down: Int)
 
 /**
  * Convert Network results to database objects
  */
 fun NetworkVideoContainer.asDomainModel(): List<Video> {
-    return videos.map {
-        Video(
-                title = it.title,
-                description = it.description,
-                url = it.url,
-                updated = it.updated,
-                thumbnail = it.thumbnail)
+    return list.map {
+        Video(defid = it.defid,
+                definition = it.definition,
+                thumbs_down = it.thumbs_down,
+                thumbs_up = it.thumbs_up,
+                sound_urls = it.sound_urls,
+                author = it.author,
+                word = it.word,
+                current_vote = it.current_vote,
+                written_on = it.written_on,
+                example = it.example,
+                permalink = it.permalink)
     }
 }
+
+//create an extension function that converts from data transfer objects to database objects
+
+

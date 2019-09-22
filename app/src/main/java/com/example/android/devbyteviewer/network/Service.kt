@@ -24,6 +24,8 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
+import retrofit2.http.Query
 
 // Since we only have one service, this can all go in one file.
 // If you add more services, split this to multiple files and make sure to share the retrofit
@@ -33,8 +35,12 @@ import retrofit2.http.GET
  * A retrofit service to fetch a devbyte playlist.
  */
 interface DevbyteService {
-    @GET("devbytes.json")
-    fun getPlaylist(): Deferred<NetworkVideoContainer>
+    @Headers(
+            "x-rapidapi-host:mashape-community-urban-dictionary.p.rapidapi.com",
+            "x-rapidapi-key:eeb619c16amshed1fc9164b33fbap1fd3acjsn2a12eacfaaed"
+    )
+    @GET("define")
+    fun getPlaylist(@Query("term") q: String): Deferred<NetworkVideoContainer>
 }
 
 /**
@@ -51,7 +57,7 @@ private val moshi = Moshi.Builder()
 object Network {
     // Configure retrofit to parse JSON and use coroutines
     private val retrofit = Retrofit.Builder()
-            .baseUrl("https://devbytes.udacity.com/")
+            .baseUrl("https://mashape-community-urban-dictionary.p.rapidapi.com/")
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()

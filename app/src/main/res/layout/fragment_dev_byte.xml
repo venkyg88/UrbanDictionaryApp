@@ -28,10 +28,12 @@
             type="com.example.android.devbyteviewer.viewmodels.DevByteViewModel" />
     </data>
 
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_grey">
+
 
         <ProgressBar
             android:id="@+id/loading_spinner"
@@ -43,7 +45,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/devbyte_item" />
     </FrameLayout>
 </layout>

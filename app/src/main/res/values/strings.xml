@@ -17,4 +17,9 @@
 
 <resources>
     <string name="app_name">DevByte Viewer</string>
+    <string name="definition">Dummy Text which shows the definition of the term</string>
+    <string name="author">Author name</string>
+    <string name="search">Searched term</string>
+    <string name="thumbsUp">Up votes</string>
+    <string name="thumbsDown">Down Votes</string>
 </resources>

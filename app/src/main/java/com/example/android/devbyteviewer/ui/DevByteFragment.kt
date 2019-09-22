@@ -102,7 +102,7 @@ class DevByteFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = DevByteAdapter(VideoClick {
+        viewModelAdapter = DevByteAdapter(/*VideoClick {
             // When a video is clicked this block or lambda will be called by DevByteAdapter
 
             // context is not around, we can safely discard this click since the Fragment is no
@@ -117,7 +117,7 @@ class DevByteFragment : Fragment() {
             }
 
             startActivity(intent)
-        })
+        }*/)
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(context)
@@ -130,11 +130,11 @@ class DevByteFragment : Fragment() {
     /**
      * Helper method to generate YouTube app links
      */
-    private val Video.launchUri: Uri
+    /*private val Video.launchUri: Uri
         get() {
             val httpUri = Uri.parse(url)
             return Uri.parse("vnd.youtube:" + httpUri.getQueryParameter("v"))
-        }
+        }*/
 }
 
 /**
@@ -153,7 +153,7 @@ class VideoClick(val block: (Video) -> Unit) {
 /**
  * RecyclerView Adapter for setting up data binding on the items in the list.
  */
-class DevByteAdapter(val callback: VideoClick) : RecyclerView.Adapter<DevByteViewHolder>() {
+class DevByteAdapter(/*val callback: VideoClick*/) : RecyclerView.Adapter<DevByteViewHolder>() {
 
     /**
      * The videos that our Adapter will show
@@ -191,9 +191,11 @@ class DevByteAdapter(val callback: VideoClick) : RecyclerView.Adapter<DevByteVie
     override fun onBindViewHolder(holder: DevByteViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.video = videos[position]
-            it.videoCallback = callback
+            //it.videoCallback = callback
         }
     }
+
+
 
 }
 
