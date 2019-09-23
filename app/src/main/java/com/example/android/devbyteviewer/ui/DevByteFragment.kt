@@ -17,8 +17,6 @@
 
 package com.example.android.devbyteviewer.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.devbyteviewer.R
 import com.example.android.devbyteviewer.databinding.DevbyteItemBinding
 import com.example.android.devbyteviewer.databinding.FragmentDevByteBinding
-import com.example.android.devbyteviewer.domain.Video
+import com.example.android.devbyteviewer.domain.Dictionary
 import com.example.android.devbyteviewer.viewmodels.DevByteViewModel
 
 /**
@@ -55,7 +53,7 @@ class DevByteFragment : Fragment() {
     }
 
     /**
-     * RecyclerView Adapter for converting a list of Video to cards.
+     * RecyclerView Adapter for converting a list of Dictionary to cards.
      */
     private var viewModelAdapter: DevByteAdapter? = null
 
@@ -67,9 +65,9 @@ class DevByteFragment : Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.playlist.observe(viewLifecycleOwner, Observer<List<Video>> { videos ->
-            videos?.apply {
-                viewModelAdapter?.videos = videos
+        viewModel.playlist.observe(viewLifecycleOwner, Observer<List<Dictionary>> { dictionaries ->
+            dictionaries?.apply {
+                viewModelAdapter?.dictionaries = dictionaries
             }
         })
     }
@@ -102,22 +100,7 @@ class DevByteFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = DevByteAdapter(/*VideoClick {
-            // When a video is clicked this block or lambda will be called by DevByteAdapter
-
-            // context is not around, we can safely discard this click since the Fragment is no
-            // longer on the screen
-            val packageManager = context?.packageManager ?: return@VideoClick
-
-            // Try to generate a direct intent to the YouTube app
-            var intent = Intent(Intent.ACTION_VIEW, it.launchUri)
-            if(intent.resolveActivity(packageManager) == null) {
-                // YouTube app isn't found, use the web url
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.url))
-            }
-
-            startActivity(intent)
-        }*/)
+        viewModelAdapter = DevByteAdapter()
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(context)
@@ -127,38 +110,19 @@ class DevByteFragment : Fragment() {
         return binding.root
     }
 
-    /**
-     * Helper method to generate YouTube app links
-     */
-    /*private val Video.launchUri: Uri
-        get() {
-            val httpUri = Uri.parse(url)
-            return Uri.parse("vnd.youtube:" + httpUri.getQueryParameter("v"))
-        }*/
 }
 
-/**
- * Click listener for Videos. By giving the block a name it helps a reader understand what it does.
- *
- */
-class VideoClick(val block: (Video) -> Unit) {
-    /**
-     * Called when a video is clicked
-     *
-     * @param video the video that was clicked
-     */
-    fun onClick(video: Video) = block(video)
-}
+
 
 /**
  * RecyclerView Adapter for setting up data binding on the items in the list.
  */
-class DevByteAdapter(/*val callback: VideoClick*/) : RecyclerView.Adapter<DevByteViewHolder>() {
+class DevByteAdapter() : RecyclerView.Adapter<DevByteViewHolder>() {
 
     /**
-     * The videos that our Adapter will show
+     * The Dictionaries that our Adapter will show
      */
-    var videos: List<Video> = emptyList()
+    var dictionaries: List<Dictionary> = emptyList()
         set(value) {
             field = value
             // For an extra challenge, update this to use the paging library.
@@ -181,7 +145,7 @@ class DevByteAdapter(/*val callback: VideoClick*/) : RecyclerView.Adapter<DevByt
         return DevByteViewHolder(withDataBinding)
     }
 
-    override fun getItemCount() = videos.size
+    override fun getItemCount() = dictionaries.size
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method should
@@ -190,8 +154,7 @@ class DevByteAdapter(/*val callback: VideoClick*/) : RecyclerView.Adapter<DevByt
      */
     override fun onBindViewHolder(holder: DevByteViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.video = videos[position]
-            //it.videoCallback = callback
+            it.video = dictionaries[position]
         }
     }
 

@@ -1,19 +1,4 @@
-/*
- * Copyright 2018, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
+
 
 package com.example.android.devbyteviewer.database
 
@@ -22,27 +7,27 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface VideoDao {
-    @Query("select * from databasevideo")
-    fun getVideos(): LiveData<List<DatabaseVideo>>
+interface DictionaryDao {
+    @Query("select * from databasedictionary")
+    fun getDictionaries(): LiveData<List<DatabaseDictionary>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: DatabaseVideo)
+    fun insertAll(vararg dictionaries: DatabaseDictionary)
 }
 
-@Database(entities = [DatabaseVideo::class], version = 2)
-abstract class VideosDatabase : RoomDatabase() {
-    abstract val videoDao: VideoDao
+@Database(entities = [DatabaseDictionary::class], version = 2)
+abstract class DictionariesDatabase : RoomDatabase() {
+    abstract val dictionaryDao: DictionaryDao
 }
 
-private lateinit var INSTANCE: VideosDatabase
+private lateinit var INSTANCE: DictionariesDatabase
 
-fun getDatabase(context: Context): VideosDatabase {
+fun getDatabase(context: Context): DictionariesDatabase {
 
-    synchronized(VideosDatabase::class.java) {
+    synchronized(DictionariesDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
-                    VideosDatabase::class.java, "videos")
+                    DictionariesDatabase::class.java, "Dictionary")
                     .fallbackToDestructiveMigration()
                     .build()
         }

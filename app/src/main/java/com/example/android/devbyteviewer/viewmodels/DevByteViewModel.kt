@@ -20,15 +20,11 @@ package com.example.android.devbyteviewer.viewmodels
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.devbyteviewer.database.getDatabase
-import com.example.android.devbyteviewer.domain.Video
-import com.example.android.devbyteviewer.network.Network
-import com.example.android.devbyteviewer.network.asDomainModel
-import com.example.android.devbyteviewer.repository.VideosRepository
+import com.example.android.devbyteviewer.repository.DictionariesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import java.io.IOException
 
 /**
  * DevByteViewModel designed to store and manage UI-related data in a lifecycle conscious way. This
@@ -60,16 +56,16 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
     //database singleton
     private val database = getDatabase(application)
     //create the repository
-    private val videosRepository = VideosRepository(database)
+    private val dictionaryRepository = DictionariesRepository(database)
 
-    //Refresh the videos using the repository
+    //Refresh the dictionaries using the repository
     init {
         viewModelScope.launch {
-            videosRepository.refreshVideos()
+            dictionaryRepository.refreshDictionareis()
         }
     }
 
-    var playlist = videosRepository.videos
+    var playlist = dictionaryRepository.dictionaryList
 
     /**
      * Cancel all coroutines when the ViewModel is cleared

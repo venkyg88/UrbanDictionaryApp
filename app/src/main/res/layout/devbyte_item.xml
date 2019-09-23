@@ -25,7 +25,7 @@
 
         <variable
             name="video"
-            type="com.example.android.devbyteviewer.domain.Video" />
+            type="com.example.android.devbyteviewer.domain.Dictionary" />
 
         <!--<variable
             name="videoCallback"

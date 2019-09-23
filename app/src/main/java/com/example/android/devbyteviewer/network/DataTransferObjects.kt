@@ -17,8 +17,8 @@
 
 package com.example.android.devbyteviewer.network
 
-import com.example.android.devbyteviewer.database.DatabaseVideo
-import com.example.android.devbyteviewer.domain.Video
+import com.example.android.devbyteviewer.database.DatabaseDictionary
+import com.example.android.devbyteviewer.domain.Dictionary
 import com.squareup.moshi.JsonClass
 
 /**
@@ -33,11 +33,11 @@ import com.squareup.moshi.JsonClass
  * This is to parse first level of our network result which looks like
  *
  * {
- *   "videos": []
+ *   "dictionaries": []
  * }
  */
 @JsonClass(generateAdapter = true)
-data class NetworkVideoContainer(val list: List<NetworkVideo>)
+data class NetworkDictionaryContainer(val list: List<NetworkVideo>)
 
 /**
  * Videos represent a devbyte that can be played.
@@ -58,9 +58,9 @@ data class NetworkVideo(val defid: Int,
 /**
  * Convert Network results to database objects
  */
-fun NetworkVideoContainer.asDomainModel(): List<Video> {
+fun NetworkDictionaryContainer.asDomainModel(): List<Dictionary> {
     return list.map {
-        Video(defid = it.defid,
+        Dictionary(defid = it.defid,
                 definition = it.definition,
                 thumbs_down = it.thumbs_down,
                 thumbs_up = it.thumbs_up,
@@ -75,9 +75,9 @@ fun NetworkVideoContainer.asDomainModel(): List<Video> {
 
 //create an extension function that converts from data transfer objects to database objects
 
-fun NetworkVideoContainer.asDatabaseModel(): Array<DatabaseVideo> {
+fun NetworkDictionaryContainer.asDatabaseModel(): Array<DatabaseDictionary> {
     return list.map {
-        DatabaseVideo(defid = it.defid,
+        DatabaseDictionary(defid = it.defid,
                 definition = it.definition,
                 thumbs_down = it.thumbs_down,
                 thumbs_up = it.thumbs_up,
