@@ -63,7 +63,6 @@ fun NetworkVideoContainer.asDomainModel(): List<Video> {
                 definition = it.definition,
                 thumbs_down = it.thumbs_down,
                 thumbs_up = it.thumbs_up,
-                sound_urls = it.sound_urls,
                 author = it.author,
                 word = it.word,
                 current_vote = it.current_vote,
