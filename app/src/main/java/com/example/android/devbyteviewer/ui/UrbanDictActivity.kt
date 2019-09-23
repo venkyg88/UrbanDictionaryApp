@@ -27,7 +27,7 @@ import com.example.android.devbyteviewer.R
  * This is a single activity application that uses the Navigation library. Content is displayed
  * by Fragments.
  */
-class DevByteActivity : AppCompatActivity() {
+class UrbanDictActivity : AppCompatActivity() {
 
     /**
      * Called when the activity is starting.  This is where most initialization
@@ -35,7 +35,7 @@ class DevByteActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dev_byte_viewer)
+        setContentView(R.layout.activity_urab_dict_viewer)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

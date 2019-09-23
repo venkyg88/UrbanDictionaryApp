@@ -30,14 +30,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.devbyteviewer.R
 import com.example.android.devbyteviewer.databinding.DevbyteItemBinding
-import com.example.android.devbyteviewer.databinding.FragmentDevByteBinding
+import com.example.android.devbyteviewer.databinding.FragmentUrabDictBinding
 import com.example.android.devbyteviewer.domain.Dictionary
 import com.example.android.devbyteviewer.viewmodels.DevByteViewModel
 
 /**
  * Show a list of DevBytes on screen.
  */
-class DevByteFragment : Fragment() {
+class UrbanDictFragment : Fragment() {
 
     /**
      * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
@@ -90,9 +90,9 @@ class DevByteFragment : Fragment() {
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding: FragmentDevByteBinding = DataBindingUtil.inflate(
+        val binding: FragmentUrabDictBinding = DataBindingUtil.inflate(
                 inflater,
-                R.layout.fragment_dev_byte,
+                R.layout.fragment_urab_dict,
                 container,
                 false)
         // Set the lifecycleOwner so DataBinding can observe LiveData
@@ -154,7 +154,7 @@ class DevByteAdapter() : RecyclerView.Adapter<DevByteViewHolder>() {
      */
     override fun onBindViewHolder(holder: DevByteViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.video = dictionaries[position]
+            it.dictionary = dictionaries[position]
         }
     }
 

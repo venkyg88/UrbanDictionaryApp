@@ -16,7 +16,7 @@
   -->
 
 <resources>
-    <string name="app_name">DevByte Viewer</string>
+    <string name="app_name">Dictionary Viewer</string>
     <string name="definition">Dummy Text which shows the definition of the term</string>
     <string name="author">Author name</string>
     <string name="search">Searched term</string>

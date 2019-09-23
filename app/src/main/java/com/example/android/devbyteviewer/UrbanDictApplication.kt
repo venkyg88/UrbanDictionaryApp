@@ -7,7 +7,7 @@ import timber.log.Timber
 /**
  * Override application to setup background work via WorkManager
  */
-class DevByteApplication : Application() {
+class UrbanDictApplication : Application() {
 
     /**
      * onCreate is called before the first screen is shown to the user.
