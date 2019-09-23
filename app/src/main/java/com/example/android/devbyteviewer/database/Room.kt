@@ -11,6 +11,12 @@ interface DictionaryDao {
     @Query("select * from databasedictionary")
     fun getDictionaries(): LiveData<List<DatabaseDictionary>>
 
+    @Query("SELECT * FROM databasedictionary ORDER BY thumbs_up ASC")
+    fun getUpVotesInAscendingOrder(): LiveData<List<DatabaseDictionary>>
+
+    @Query("SELECT * FROM databasedictionary ORDER BY thumbs_down ASC")
+    fun getDownVotesInAscendingOrder(): LiveData<List<DatabaseDictionary>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg dictionaries: DatabaseDictionary)
 }
