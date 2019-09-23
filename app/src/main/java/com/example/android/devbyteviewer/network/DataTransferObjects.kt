@@ -17,6 +17,7 @@
 
 package com.example.android.devbyteviewer.network
 
+import com.example.android.devbyteviewer.database.DatabaseVideo
 import com.example.android.devbyteviewer.domain.Video
 import com.squareup.moshi.JsonClass
 
@@ -74,4 +75,17 @@ fun NetworkVideoContainer.asDomainModel(): List<Video> {
 
 //create an extension function that converts from data transfer objects to database objects
 
-
+fun NetworkVideoContainer.asDatabaseModel(): Array<DatabaseVideo> {
+    return list.map {
+        DatabaseVideo(defid = it.defid,
+                definition = it.definition,
+                thumbs_down = it.thumbs_down,
+                thumbs_up = it.thumbs_up,
+                author = it.author,
+                word = it.word,
+                current_vote = it.current_vote,
+                written_on = it.written_on,
+                example = it.example,
+                permalink = it.permalink)
+    }.toTypedArray()
+}

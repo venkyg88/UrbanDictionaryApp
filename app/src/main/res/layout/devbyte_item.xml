@@ -27,9 +27,9 @@
             name="video"
             type="com.example.android.devbyteviewer.domain.Video" />
 
-        <variable
+        <!--<variable
             name="videoCallback"
-            type="com.example.android.devbyteviewer.ui.VideoClick" />
+            type="com.example.android.devbyteviewer.ui.VideoClick" />-->
     </data>
 
     <com.google.android.material.card.MaterialCardView
