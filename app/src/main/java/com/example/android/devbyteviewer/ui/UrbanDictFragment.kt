@@ -18,9 +18,7 @@
 package com.example.android.devbyteviewer.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -106,9 +104,39 @@ class UrbanDictFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = viewModelAdapter
         }
-
+        setHasOptionsMenu(true)
         return binding.root
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+            when (item.itemId) {
+                R.id.menu_search -> {
+                    //viewModel.clearCompletedTasks()
+                    true
+                }
+                R.id.menu_up_votes -> {
+                    viewModel.aOrderList.observe(viewLifecycleOwner, Observer<List<Dictionary>> { dictionaries ->
+                        dictionaries?.apply {
+                            viewModelAdapter?.dictionaries = dictionaries
+                        }
+                    })
+                    true
+                }
+                R.id.menu_down_votes -> {
+                    viewModel.dOrderList.observe(viewLifecycleOwner, Observer<List<Dictionary>> { dictionaries ->
+                        dictionaries?.apply {
+                            viewModelAdapter?.dictionaries = dictionaries
+                        }
+                    })
+                    true
+                }
+                else -> false
+            }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        return inflater.inflate(R.menu.main, menu)
+    }
+
 
 }
 
@@ -117,7 +145,7 @@ class UrbanDictFragment : Fragment() {
 /**
  * RecyclerView Adapter for setting up data binding on the items in the list.
  */
-class DevByteAdapter() : RecyclerView.Adapter<DevByteViewHolder>() {
+class DevByteAdapter : RecyclerView.Adapter<DevByteViewHolder>() {
 
     /**
      * The Dictionaries that our Adapter will show
@@ -137,6 +165,7 @@ class DevByteAdapter() : RecyclerView.Adapter<DevByteViewHolder>() {
      * an item.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DevByteViewHolder {
+
         val withDataBinding: DevbyteItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 DevByteViewHolder.LAYOUT,

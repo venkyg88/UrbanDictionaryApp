@@ -38,11 +38,12 @@ class UrbanDictActivity : AppCompatActivity() {
         setContentView(R.layout.activity_urab_dict_viewer)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         val searchView = menu.findItem(R.id.menu_search)?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+
                 return true
             }
 
@@ -53,5 +54,5 @@ class UrbanDictActivity : AppCompatActivity() {
 
 
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 }

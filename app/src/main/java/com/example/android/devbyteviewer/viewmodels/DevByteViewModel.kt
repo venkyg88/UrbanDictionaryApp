@@ -45,6 +45,7 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
      */
     private val viewModelJob = SupervisorJob()
 
+
     /**
      * This is the main scope for all coroutines launched by MainViewModel.
      *
@@ -65,7 +66,12 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+
     var playlist = dictionaryRepository.dictionaryList
+
+    var aOrderList = dictionaryRepository.dictionaryListAOrder
+
+    var dOrderList = dictionaryRepository.dictionaryListDOrder
 
     /**
      * Cancel all coroutines when the ViewModel is cleared

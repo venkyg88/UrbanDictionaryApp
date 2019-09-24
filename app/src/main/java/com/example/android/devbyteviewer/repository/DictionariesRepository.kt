@@ -26,4 +26,13 @@ class DictionariesRepository(private val database: DictionariesDatabase) {
 
         }
     }
+
+    val dictionaryListAOrder: LiveData<List<Dictionary>> = Transformations.map(database.dictionaryDao.getUpVotesInAscendingOrder()) {
+        it.asDomainModel()
+    }
+
+    val dictionaryListDOrder: LiveData<List<Dictionary>> = Transformations.map(database.dictionaryDao.getDownVotesInAscendingOrder()) {
+        it.asDomainModel()
+    }
+
 }
